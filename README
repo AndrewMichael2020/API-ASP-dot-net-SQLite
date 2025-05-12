@@ -33,6 +33,7 @@ A working and auditable ASP.NET Core Web API for managing users and blogs, built
 git clone https://github.com/AndrewMichael2020/codespaces-blank.git
 cd codespaces-blank/BlogAPI
 ```
+Or run in Codespaces.
 
 ### Restore dependencies
 
