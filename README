@@ -1,0 +1,184 @@
+# BlogAPI
+
+A secure, auditable, and robust ASP.NET Core Web API for managing users and blogs, built with SQLite and Entity Framework Core.
+
+---
+
+## Features
+
+- **User Management:** Full CRUD for users.
+- **Blog Management:** Full CRUD for blogs.
+- **SQLite Database:** Lightweight, file-based storage.
+- **Middleware:**
+  - **Logging:** Logs HTTP methods, paths, and response codes.
+  - **Authentication:** Token-based (use `Bearer valid-token`).
+  - **Error Handling:** Consistent JSON error responses.
+- **OpenAPI/Swagger:** API documentation and testing UI.
+- **Comprehensive Tests:** xUnit-based, with 98%+ code coverage.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- [.NET 8 SDK](https://dotnet.microsoft.com/download)
+- [SQLite](https://www.sqlite.org/download.html) *(optional, for DB inspection)*
+
+---
+
+## Setup
+
+```sh
+git clone https://github.com/AndrewMichael2020/codespaces-blank.git
+cd codespaces-blank/BlogAPI
+```
+
+### Restore dependencies
+
+```sh
+dotnet restore
+```
+
+### Build the project
+
+```sh
+dotnet build
+```
+
+### Run the API
+
+```sh
+dotnet run
+```
+
+> The API will be available at `http://localhost:5239`  
+> *(Or as shown in your Codespaces terminal)*
+
+---
+
+## Development Environment
+
+### Project Structure
+
+| Area                | Path                        |
+|---------------------|-----------------------------|
+| API Source          | `BlogAPI/`                  |
+| Tests               | `BlogAPI.Tests/`            |
+| Coverage Reports    | `coveragereport/`           |
+| Controllers         | `Controllers/`              |
+| Models              | `Models/`                   |
+| Middleware          | `Middleware/`               |
+| Database Context    | `Data/AppDbContext.cs`      |
+
+---
+
+### Required Packages
+
+If you add new projects or restore missing packages:
+
+#### For the API project:
+
+```sh
+dotnet restore BlogAPI
+```
+
+#### For the test project:
+
+```sh
+dotnet restore BlogAPI.Tests
+```
+
+#### Optional (for mocking/assertions):
+
+```sh
+dotnet add BlogAPI.Tests package Moq
+dotnet add BlogAPI.Tests package FluentAssertions
+```
+
+---
+
+## Running Tests and Coverage
+
+### Run all tests
+
+```sh
+dotnet test
+```
+
+### Run tests with coverage
+
+```sh
+dotnet test /p:CollectCoverage=true
+```
+
+### Generate and view coverage report
+
+```sh
+reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coveragereport
+```
+
+Then open `coveragereport/index.html` in your browser.
+
+---
+
+## API Usage
+
+### Authentication
+
+All endpoints require the following header:
+
+```
+Authorization: Bearer valid-token
+```
+
+### Example Requests
+
+See [`tests.http`](tests.http) for ready-to-use HTTP requests for all endpoints.
+
+#### Users
+
+- **Create:** `POST /api/users`
+- **Read All:** `GET /api/users`
+- **Read One:** `GET /api/users/{id}`
+- **Update:** `PUT /api/users/{id}`
+- **Delete:** `DELETE /api/users/{id}`
+
+#### Blogs
+
+- **Create:** `POST /api/blogs`
+- **Read All:** `GET /api/blogs`
+- **Read One:** `GET /api/blogs/{id}`
+- **Update:** `PUT /api/blogs/{id}`
+- **Delete:** `DELETE /api/blogs/{id}`
+
+---
+
+## Middleware Pipeline
+
+1. **Error Handling**  
+2. **Authentication**  
+3. **Logging**
+
+---
+
+## Database
+
+- Uses `users.db` SQLite file (auto-created).
+- To reset:  
+  ```sh
+  rm users.db
+  dotnet run
+  ```
+
+---
+
+## License
+
+MIT
+
+---
+
+## Author
+
+[AndrewMichael2020](https://github.com/AndrewMichael2020)
