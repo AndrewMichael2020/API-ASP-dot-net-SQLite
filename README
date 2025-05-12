@@ -1,6 +1,6 @@
 # BlogAPI
 
-A secure, auditable, and robust ASP.NET Core Web API for managing users and blogs, built with SQLite and Entity Framework Core.
+A working and auditable ASP.NET Core Web API for managing users and blogs, built with SQLite and Entity Framework Core.
 
 ---
 
@@ -14,7 +14,7 @@ A secure, auditable, and robust ASP.NET Core Web API for managing users and blog
   - **Authentication:** Token-based (use `Bearer valid-token`).
   - **Error Handling:** Consistent JSON error responses.
 - **OpenAPI/Swagger:** API documentation and testing UI.
-- **Comprehensive Tests:** xUnit-based, with 98%+ code coverage.
+- **Comprehensive Tests:** xUnit-based, with 97%+ code coverage.
 
 ---
 
@@ -109,7 +109,7 @@ dotnet test
 ### Run tests with coverage
 
 ```sh
-dotnet test /p:CollectCoverage=true
+dotnet test -CollectCoverage=true
 ```
 
 ### Generate and view coverage report
@@ -117,8 +117,7 @@ dotnet test /p:CollectCoverage=true
 ```sh
 reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coveragereport
 ```
-
-Then open `coveragereport/index.html` in your browser.
+Then open `coveragereport/index.html` in your browser. Run a small server if needed to open htmls.
 
 ---
 
@@ -126,7 +125,7 @@ Then open `coveragereport/index.html` in your browser.
 
 ### Authentication
 
-All endpoints require the following header:
+All relevant tests have the following header for endpoints:
 
 ```
 Authorization: Bearer valid-token
@@ -134,7 +133,7 @@ Authorization: Bearer valid-token
 
 ### Example Requests
 
-See [`tests.http`](tests.http) for ready-to-use HTTP requests for all endpoints.
+See [`tests.http`](tests.http) for ready-to-use HTTP requests for all endpoints. Requires an extra Http requests testing package.
 
 #### Users
 
