@@ -36,4 +36,7 @@ public class AuthenticationMiddlewareTests : IClassFixture<WebApplicationFactory
     {
         var client = _factory.CreateClient();
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "valid-token");
-        var response = await
+        var response = await client.GetAsync("/api/users");
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    }
+}

@@ -104,6 +104,35 @@ public class BlogsControllerTests
     }
 
     [Fact]
+    public async Task UpdateBlog_ReturnsNotFound_WhenBlogDoesNotExist()
+    {
+        var db = GetDbContext();
+        var controller = new BlogsController(db);
+        var blog = new Blog { Id = 999, Title = "Missing", Content = "Missing" };
+
+        var result = await controller.UpdateBlog(999, blog);
+        Assert.IsType<NotFoundObjectResult>(result);
+    }
+
+    [Fact]
+    public async Task UpdateBlog_Handles_DbUpdateConcurrencyException()
+    {
+        var db = GetDbContext();
+        var blog = new Blog { Title = "Test", Content = "Test" };
+        db.Blogs.Add(blog);
+        db.SaveChanges();
+
+        var controller = new BlogsController(db);
+
+        // Simulate concurrency exception by removing the blog before update
+        db.Blogs.Remove(blog);
+        db.SaveChanges();
+
+        var result = await controller.UpdateBlog(blog.Id, blog);
+        Assert.IsType<NotFoundObjectResult>(result);
+    }
+
+    [Fact]
     public async Task DeleteBlog_RemovesBlog()
     {
         var db = GetDbContext();
@@ -124,6 +153,35 @@ public class BlogsControllerTests
         var controller = new BlogsController(db);
 
         var result = await controller.DeleteBlog(12345);
+        Assert.IsType<NotFoundObjectResult>(result);
+    }
+
+    [Fact]
+    public async Task UpdateUser_ReturnsNotFound_WhenUserDoesNotExist()
+    {
+        var db = GetDbContext();
+        var controller = new UsersController(db);
+        var user = new User { Id = 999, Name = "Missing", Email = "missing@example.com" };
+
+        var result = await controller.UpdateUser(999, user);
+        Assert.IsType<NotFoundObjectResult>(result);
+    }
+
+    [Fact]
+    public async Task UpdateUser_Handles_DbUpdateConcurrencyException()
+    {
+        var db = GetDbContext();
+        var user = new User { Name = "Test", Email = "test@example.com" };
+        db.Users.Add(user);
+        db.SaveChanges();
+
+        var controller = new UsersController(db);
+
+        // Simulate concurrency exception by removing the user before update
+        db.Users.Remove(user);
+        db.SaveChanges();
+
+        var result = await controller.UpdateUser(user.Id, user);
         Assert.IsType<NotFoundObjectResult>(result);
     }
 }

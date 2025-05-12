@@ -104,6 +104,35 @@ public class UsersControllerTests
     }
 
     [Fact]
+    public async Task UpdateUser_ReturnsNotFound_WhenUserDoesNotExist()
+    {
+        var db = GetDbContext();
+        var controller = new UsersController(db);
+        var user = new User { Id = 999, Name = "Missing", Email = "missing@example.com" };
+
+        var result = await controller.UpdateUser(999, user);
+        Assert.IsType<NotFoundObjectResult>(result);
+    }
+
+    [Fact]
+    public async Task UpdateUser_Handles_DbUpdateConcurrencyException()
+    {
+        var db = GetDbContext();
+        var user = new User { Name = "Test", Email = "test@example.com" };
+        db.Users.Add(user);
+        db.SaveChanges();
+
+        var controller = new UsersController(db);
+
+        // Simulate concurrency exception by removing the user before update
+        db.Users.Remove(user);
+        db.SaveChanges();
+
+        var result = await controller.UpdateUser(user.Id, user);
+        Assert.IsType<NotFoundObjectResult>(result);
+    }
+
+    [Fact]
     public async Task DeleteUser_RemovesUser()
     {
         var db = GetDbContext();
