@@ -22,8 +22,8 @@ A working and auditable ASP.NET Core Web API for managing users and blogs, built
 
 ### Prerequisites
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download)
-- [SQLite](https://www.sqlite.org/download.html) *(optional, for DB inspection)*
+- [.NET 8 SDK]
+- [SQLite]
 
 ---
 
