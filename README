@@ -1,0 +1,116 @@
+# BlogAPI
+
+A secure, auditable, and robust ASP.NET Core Web API for managing users and blogs, built with SQLite and Entity Framework Core.
+
+---
+
+## Features
+
+- **User Management:** Full CRUD for users.
+- **Blog Management:** Full CRUD for blogs.
+- **SQLite Database:** Lightweight, file-based storage.
+- **Middleware:**
+  - **Logging:** Logs HTTP methods, paths, and response codes.
+  - **Authentication:** Token-based (use `Bearer valid-token`).
+  - **Error Handling:** Consistent JSON error responses.
+- **OpenAPI/Swagger:** API documentation and testing UI.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- [.NET 8 SDK](https://dotnet.microsoft.com/download)
+- [SQLite](https://www.sqlite.org/download.html) (optional, for inspecting the database)
+
+### Setup
+
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/AndrewMichael2020/codespaces-blank.git
+   cd codespaces-blank/BlogAPI
+   ```
+
+2. **Restore dependencies:**
+   ```sh
+   dotnet restore
+   ```
+
+3. **Build the project:**
+   ```sh
+   dotnet build
+   ```
+
+4. **Run the API:**
+   ```sh
+   dotnet run
+   ```
+   The API will be available at `http://localhost:5239`.
+
+---
+
+## API Usage
+
+### Authentication
+
+All endpoints require the following header:
+```
+Authorization: Bearer valid-token
+```
+
+### Example Requests
+
+See [`tests.http`](tests.http) for ready-to-use HTTP requests for all endpoints.
+
+#### Users
+
+- **Create:** `POST /api/users`
+- **Read All:** `GET /api/users`
+- **Read One:** `GET /api/users/{id}`
+- **Update:** `PUT /api/users/{id}`
+- **Delete:** `DELETE /api/users/{id}`
+
+#### Blogs
+
+- **Create:** `POST /api/blogs`
+- **Read All:** `GET /api/blogs`
+- **Read One:** `GET /api/blogs/{id}`
+- **Update:** `PUT /api/blogs/{id}`
+- **Delete:** `DELETE /api/blogs/{id}`
+
+---
+
+## Middleware Pipeline
+
+1. **Error Handling**  
+2. **Authentication**  
+3. **Logging**
+
+---
+
+## Database
+
+- Uses `users.db` SQLite file (auto-created).
+- To reset, delete `users.db` and restart the API.
+
+---
+
+## Development
+
+- Controllers: [`Controllers/`](Controllers/)
+- Models: [`Models/`](Models/)
+- Middleware: [`Middleware/`](Middleware/)
+- Database Context: [`Data/AppDbContext.cs`](Data/AppDbContext.cs)
+
+---
+
+## License
+
+MIT
+
+---
+
+## Author
+
+[AndrewMichael2020](https://github.com/AndrewMichael2020)
